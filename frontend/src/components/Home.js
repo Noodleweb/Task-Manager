@@ -10,7 +10,7 @@ function Home(){
                 <h1>Welcome to Task Manager</h1>
             </header>
             <main>
-                <section class="hero">
+                <section className="hero">
                     <h2>Organize Your Tasks Efficiently</h2>
                     <p>Task Manager helps you stay organized and focused by managing your tasks effectively</p>                  
                     <Link to="/login">

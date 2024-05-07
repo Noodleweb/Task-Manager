@@ -27,6 +27,20 @@ const userSchema = new Schema({
         required: true
       }
 })
+const subTaskSchema = new Schema({
+  title: { type: String, required: true },
+  completed: { type: Boolean, default: false }
+});
+const taskSchema = new Schema({
+  title:{type:String, required:true},
+  description:{type:String, required:false},
+  dueDate:{type:Date, required:false},
+  subTasks: [subTaskSchema],
+  user: { type: Schema.Types.ObjectId, ref: 'User' } 
+});
 
-const Users = mongoose.model('Users', userSchema,'users')
-module.exports = {'Users':Users}
+taskSchema.index({ user: 1 });
+
+const Tasks = mongoose.model('Task', taskSchema,'tasks');
+const Users = mongoose.model('Users', userSchema,'users');
+module.exports = {'Users':Users,'Task':Tasks}

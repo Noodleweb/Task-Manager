@@ -39,18 +39,15 @@ function Login(){
             
             if (response.status === 200) {
                 console.log('Login successful');
-                localStorage.setItem('token', response.data.token); 
+                signIn({
+                    token:response.data.accessToken,
+                    expiresIn:3600,
+                    tokenType:"Bearer",
+                    authState:{email:formData.email}
+                    }); 
                 navigate('/dashboard');
             }
-            
-           
-           signIn({
-            token:response.data.token,
-            expiresIn:3600,
-            tokenType:'Bearer',
-            authState:{email:formData.email}
-            });
-            
+     
         }
         catch(error){
             console.error('Error:', error);
