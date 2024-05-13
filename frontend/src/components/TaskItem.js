@@ -5,7 +5,9 @@ import axios from 'axios';
 
 function TaskItem({ task,fetchTasks }) {
 
+    //State hook to manage the subtasks of the task.
     const [subTasks, setSubTasks] = useState(task.subTasks);
+    //State hook to manage the completion status of the task.
     const [taskCompleted, setTaskCompleted] = useState(false);
 
     /**
@@ -48,25 +50,32 @@ function TaskItem({ task,fetchTasks }) {
     };  
     return (
         <div className="accordion-item">
-        <h2 className="accordion-header" id={`heading${task.id}`}>
-            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${task.id}`} aria-expanded="true" aria-controls={`collapse${task.id}`}>
+        <h2 className="accordion-header" id={`heading${task._id}`}>
+            <button 
+                className="accordion-button"
+                type="button"
+                data-bs-toggle="collapse" 
+                data-bs-target={`#collapse${task._id}`} 
+                aria-expanded="true" 
+                aria-controls={`collapse${task._id}`}
+            >
                 {task.title}
             </button>
         </h2>
-        <div id={`collapse${task.id}`} className="accordion-collapse collapse" aria-labelledby={`heading${task.id}`}>
+        <div id={`collapse${task._id}`} className="accordion-collapse collapse" aria-labelledby={`heading${task._id}`}>
             <div className="accordion-body">
                 <p><strong>Description:</strong> {task.description}</p>
                 {task.dueDate ? 
-                (<p><strong>Due Date:</strong> {new Date(task.dueDate).toLocaleDateString()}</p>) : 
-                (<p><strong>Due Date:</strong> No due date</p>)}
+                    (<p><strong>Due Date:</strong> {new Date(task.dueDate).toLocaleDateString()}</p>) : 
+                    (<p><strong>Due Date:</strong> No due date</p>)}
                 <ul className="list-group">
                     {subTasks.map((subTask,index) => (
-                        <li className="list-group-item d-flex justify-content-between align-items-center" key={subTask._id}>
+                        <li className="list-group-item d-flex justify-content-between align-items-center" key={subTask._id} onClick={() => handleSubTaskChange(index)}
+                        style={{ cursor: 'pointer' }}>
                             <div>
                                 <input 
                                     type="checkbox" 
                                     checked={subTask.completed} 
-                                    onChange={() => handleSubTaskChange(index)} 
                                 />
                                 <span className={subTask.completed ? 'text-decoration-line-through ms-2' : 'ms-2'}>{subTask.title}</span>
                             </div>

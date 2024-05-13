@@ -155,7 +155,7 @@ function Dashboard(){
                 </div>
                 {error}
                 {/* Task Container */}
-                <div className="accordion mt-4" id="taskAccordion">
+                <div className="accordion accordion-flush mt-4" id="taskAccordion">
                     {tasks.map(task => (
                         <TaskItem key={task._id} task={task} fetchTasks={fetchTasks}/>
                     ))}

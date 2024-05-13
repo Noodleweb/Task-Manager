@@ -4,7 +4,6 @@ const Schema = mongoose.Schema
 
 const usernameValidator = {
     validator: function(value) {
-      // Add your regex pattern for username validation
       return /^[a-zA-Z0-9_-]+$/.test(value);
     },
     message: 'Username can only contain letters, numbers, underscores, and hyphens.'
